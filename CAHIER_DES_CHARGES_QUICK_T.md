@@ -269,3 +269,18 @@ Une distribution publique ou commerciale exige en plus une architecture de servi
 ### Blocages
 - Réponses de Valentin en attente : Safari ou icône installée, phrase exacte affichée, choix de session A/B/C.
 - Protection de `main` non configurée. Le Keychain mémorise encore un ancien compte GitHub.
+
+
+## Journal : 2026-11-09 (analyse fichier par fichier)
+
+### État observé
+- Tous les fichiers de code lus ; analyse dans `CAHIER_DES_CHARGES_PAR_FICHIER_QUICK_T.md`. Aucun build, test ni essai sur appareil lancé.
+- Hypothèse principale non testée : le décodage audio dans le Worker (W1) peut empêcher toute transcription mobile.
+### Décisions prises
+- Faire d'abord un essai sur le navigateur du Mac (NOUV-20) avant tout correctif du Worker. Mise de côté de l'iPhone à la demande de Valentin.
+### Tâches faites
+- Analyse par fichier ; tâches NOUV-07 à NOUV-32 ajoutées (à valider).
+### Tâches restantes
+- Essai Mac, puis correctifs P0 (NOUV-01, 02, 03, 20), puis P1, puis choix de session A, B ou C.
+### Blocages
+- Aucun essai réel consigné. Branche locale, non poussée.
