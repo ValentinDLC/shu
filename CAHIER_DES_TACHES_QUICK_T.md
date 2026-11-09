@@ -156,3 +156,47 @@ Les numéros sont indicatifs et suivront l'état réel du logiciel.
 | Date | Mise à jour |
 |---|---|
 | 2026-11-09 | Création du cahier des tâches. Aucune tâche réalisée. |
+
+
+## Tâches ajoutées suite à l'audit (2026-11-09, numérotation provisoire NOUV-xx, à valider)
+
+| Code | Priorité | Tâche |
+|---|---|---|
+| NOUV-01 | P0 | Mobile : effacer le jeton périmé sur 401, réafficher une saisie ou un message actionnable |
+| NOUV-02 | P0 | Pont : refuser livestreams, playlists et extracteurs génériques ; ajouter un timeout global |
+| NOUV-03 | P0 | Mobile : vérifier l'import audio local ; si `AudioContext` manque dans le Worker, décoder dans le thread principal (hypothèse à tester) |
+| NOUV-04 | P1 | Service worker : réseau d'abord pour `index.html` et les navigations, pour ne pas servir un ancien JS |
+| NOUV-05 | P1 | Pont : comparer le jeton en bytes, imposer une longueur minimale, trier les erreurs yt-dlp sans exposer de chemins |
+| NOUV-06 | P2 | Historique : supprimer, copier, enregistrer les échecs ; remplacer « sur cet iPhone » en dur par un texte adapté à l'appareil |
+
+
+## Tâches NOUV-07 à NOUV-32 (2026-11-09, issues de l'analyse par fichier, à valider)
+
+| Code | Priorité | Tâche |
+|---|---|---|
+| NOUV-07 | P1 | Worker : si la transcription WebGPU échoue, relancer en WASM avant d'afficher une erreur (W2) |
+| NOUV-08 | P1 | Mobile : limite de durée et de mémoire pour l'audio, message actionnable (W7, M6) |
+| NOUV-09 | P1 | Worker : libérer le pipeline précédent au changement de modèle (W3) |
+| NOUV-10 | P1 | Textes : retirer « iPhone », « Mac de test » et « reçu dans le chat » de l'interface (M7, index.html) |
+| NOUV-11 | P2 | Progression pendant la transcription et taille du modèle annoncée avant le téléchargement (W4) |
+| NOUV-12 | P2 | Worker : identifiant de requête, file d'attente et annulation (W5) |
+| NOUV-13 | P1 | Après une erreur : arrêter la barre animée et afficher l'erreur dans une zone visible avec une action (M4) |
+| NOUV-14 | P1 | `localStorage` dans un `try/catch`, avec repli en mémoire (M3) |
+| NOUV-15 | P1 | `fetch` avec délai maximal, bouton Annuler et messages réseau actionnables (M5) |
+| NOUV-16 | P2 | `storage.persist()` non bloquant, Worker protégé par `try/catch` (M10, M12) |
+| NOUV-17 | P2 | Service worker : signaler une nouvelle version, journaliser l'échec d'enregistrement (M9) |
+| NOUV-18 | P3 | Aide d'installation adaptée à Android et aux navigateurs iOS autres que Safari (M13) |
+| NOUV-19 | P1 | Pont : tâche asynchrone (création, statut, récupération) pour éviter le délai du tunnel, afficher la progression et permettre l'annulation (D8, D10, hypothèse à tester) |
+| NOUV-20 | P0 | Essai sur le navigateur du Mac (fichier audio local puis YouTube) pour valider Worker et décodage ; consigner le résultat réel (W1) |
+| NOUV-21 | P1 | Pont : message distinct quand le filtre de durée rejette la vidéo ; réponse correcte si `Content-Length` est absent (D9, D11) |
+| NOUV-22 | P2 | Pont : en-têtes de sécurité, `Cache-Control` du statique, pas d'index de répertoire, délai sur les sockets (D12) |
+| NOUV-23 | P1 | GUI et CLI : mêmes bornes que le pont pour playlists, livestreams, durée et taille (G2) |
+| NOUV-24 | P2 | Refactor : module commun pour la validation d'URL, les noms de fichiers et les options yt-dlp |
+| NOUV-25 | P2 | Configuration : champ `engines` Node, `.env.example` expliqué (non chargé automatiquement), `requirements.txt` avec `openai-whisper` (voir GIT-07), versions épinglées |
+| NOUV-26 | P2 | Interface : champs à 16 px minimum, `prefers-reduced-motion`, cibles tactiles de 44 px (CSS) |
+| NOUV-27 | P2 | PWA : contrôler les icônes (`icon.svg`, 180 px, maskable), précache tout ou rien, app installée sur une ancienne adresse |
+| NOUV-28 | P2 | Bureau : sortie cohérente CLI et GUI (retours à la ligne), texte partiel signalé, fichiers temporaires hors dossier de sortie (G3 à G5) |
+| NOUV-29 | P2 | CLI : contrôle de ffmpeg, option fichier audio local, validation d'URL, pas d'URL par défaut |
+| NOUV-30 | P2 | Confidentialité : reformuler « en privé » (l'audio YouTube passe par le Mac) et vérifier les requêtes réseau réelles de l'app |
+| NOUV-31 | P3 | Tests : réécriture indépendante des dépendances lourdes, uniquement sur demande explicite de Valentin |
+| NOUV-32 | P2 | GIT-03 : décider du sort de `A/` (contient un chemin personnel, déjà dans l'historique public) |
