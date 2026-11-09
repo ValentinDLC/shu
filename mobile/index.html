@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#142d4e" />
+    <meta name="description" content="Transcris un lien YouTube ou un fichier audio sur ton téléphone." />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+    <title>Quick T Mobile</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Quick T Mobile, accueil">
+          <span class="brand-mark" aria-hidden="true">Q</span>
+          <span>Quick T</span>
+        </a>
+        <button id="install-button" class="button button-quiet" type="button" hidden>Installer</button>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">TRANSCRIPTION SUR TON TÉLÉPHONE</p>
+        <h1 id="page-title">De l’audio au texte,<br /><span>en privé.</span></h1>
+        <p class="intro-copy">Colle un lien YouTube ou importe un fichier audio. La transcription du modèle se fait sur l’iPhone.</p>
+      </section>
+
+      <section class="card" aria-labelledby="transcription-title">
+        <h2 id="transcription-title">Nouvelle transcription</h2>
+        <label class="field-label" for="youtube-url">Lien YouTube</label>
+        <input id="youtube-url" class="field-control" type="url" inputmode="url" autocomplete="url" placeholder="https://www.youtube.com/watch?v=…" aria-describedby="youtube-help youtube-error" />
+        <small id="youtube-help" class="source-help">Le Mac de test récupère l’audio YouTube et le transmet à l’iPhone pour la transcription locale.</small>
+        <div id="session-box" class="session-box" hidden>
+          <label class="field-label" for="session-code">Code temporaire de test</label>
+          <input id="session-code" class="field-control" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Colle le code reçu dans le chat" />
+        </div>
+        <p id="youtube-error" class="source-error" role="alert" hidden></p>
+        <div class="or-divider"><span>ou importe un fichier audio</span></div>
+        <label class="file-picker" for="audio-file">
+          <span class="file-icon" aria-hidden="true">＋</span>
+          <span class="file-picker-text"><strong>Choisir un fichier audio</strong><small id="file-name">MP3, WAV, M4A ou autre format pris en charge</small></span>
+          <input id="audio-file" type="file" accept="audio/*" />
+        </label>
+
+        <div class="settings-grid">
+          <label class="field-label" for="speed-mode">Vitesse sur ce téléphone</label>
+          <select id="speed-mode" class="field-control">
+            <option value="fast">Rapide · modèle léger</option>
+            <option value="balanced">Équilibré · modèle plus précis</option>
+          </select>
+
+          <label class="field-label" for="language">Langue de l’audio</label>
+          <select id="language" class="field-control">
+            <option value="auto">Détection automatique</option>
+            <option value="fr">Français</option>
+            <option value="en">Anglais</option>
+            <option value="es">Espagnol</option>
+            <option value="de">Allemand</option>
+            <option value="it">Italien</option>
+            <option value="pt">Portugais</option>
+          </select>
+        </div>
+
+        <p class="device-note" id="device-note">Le téléphone choisira automatiquement le moteur compatible.</p>
+        <button id="transcribe-button" class="button button-primary" type="button" disabled>Transcrire</button>
+
+        <div id="progress-area" class="progress-area" hidden aria-live="polite">
+          <div class="progress-heading"><span id="status-text">Préparation…</span><span id="progress-value"></span></div>
+          <progress id="progress-bar" max="100" value="0"></progress>
+        </div>
+      </section>
+
+      <section id="result-card" class="card result-card" aria-labelledby="result-title" hidden>
+        <div class="result-heading">
+          <h2 id="result-title">Ta transcription</h2>
+          <button id="copy-button" class="button button-quiet" type="button">Copier</button>
+        </div>
+        <p id="stored-location" class="stored-location"></p>
+        <textarea id="transcript" rows="12" aria-label="Texte transcrit"></textarea>
+        <button id="download-button" class="button button-secondary" type="button">Exporter / enregistrer dans Fichiers</button>
+      </section>
+
+      <section id="history-card" class="card history-card" aria-labelledby="history-title" hidden>
+        <h2 id="history-title">Historique sur cet iPhone</h2>
+        <p class="history-intro">Les textes restent enregistrés dans Quick T sur cet appareil. Exporte-les vers Fichiers pour en garder une copie séparée.</p>
+        <div id="history-list" class="history-list"></div>
+      </section>
+
+      <p id="install-hint" class="install-hint" hidden></p>
+      <footer class="footer-note">Garde cette page ouverte pendant la transcription. Le premier téléchargement du modèle demande une connexion Wi-Fi.</footer>
+    </main>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

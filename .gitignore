@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+# Node / PWA
+node_modules/
+mobile/dist/
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Médias, modèles, données
+*.mp3
+*.wav
+*.m4a
+*.mp4
+*.webm
+*.onnx
+*.bin
+*.safetensors
+*.db
+*.sqlite*
+# Journaux, temporaires, système
+*.log
+tmp/
+temp/
+.DS_Store
+# Sorties de transcription
+transcriptions/
