@@ -240,3 +240,32 @@ Une distribution publique ou commerciale exige en plus une architecture de servi
 - **Changements effectués :**
 - **Vérifications et résultats :**
 - **Tâches restantes / blocages :**
+
+
+## Journal : 2026-11-09 (audit mobile, lecture seule)
+
+### État observé
+- Dépôt : `main` et `develop` à `a5d3e8b` (PR #1 fusionnée). Aucun build ni test lancé sur `shu_reference`.
+- Le message « Session de test non autorisée. Ouvre le lien Quick T complet. » n'existe que dans `mobile/dev_server.py` (réponse 401), pas dans le JS ni dans `dist`. L'iPhone a donc joint le pont avec un code absent ou périmé (phrase réellement affichée non confirmée).
+- Build de l'ancien dossier `A/mobile` cohérent : `dist` postérieur à `src`, cache service worker `quick-t-mobile-shell-v5` des deux côtés, logique de jeton présente dans `dist`. Le cache du service worker côté iPhone n'est pas vérifié.
+- Un tunnel `cloudflared tunnel --url http://127.0.0.1:4173` tournait, sans nom (tunnel rapide : adresse a priori temporaire).
+- Côté navigateur : le jeton est stocké dans `localStorage`, la saisie du code est masquée dès qu'un jeton existe, un 401 n'efface jamais le jeton périmé.
+- Côté pont : livestreams et playlists non bornés, repli possible sur l'extracteur générique de yt-dlp, pas de timeout global, erreurs yt-dlp brutes renvoyées au client.
+- Hypothèse non vérifiée : le décodage audio est fait dans le Worker (`transcriber.worker.js`, URL `blob:`) ; `AudioContext` n'existe pas dans un Worker, ce qui peut casser l'import de fichier audio.
+
+### Décisions prises
+- Réaliser des essais réels (iPhone) avant de choisir l'option de session A, B ou C (MOB-S2). Aucun choix fait.
+- Travail uniquement dans `shu_reference`, par branches depuis `develop` et PR vers `develop`. `main` n'est jamais modifié directement.
+
+### Tâches faites
+- Import du code et des cahiers dans le dépôt, fusion de la PR #1.
+- Audit en lecture seule de `dev_server.py`, `main.js`, `sw.js`, `manifest.webmanifest`, `vite.config.js`, `package.json`, `index.html`, `transcriber.worker.js`.
+
+### Tâches restantes
+- Essais réels sur iPhone : aucun consigné à ce jour.
+- Correctifs `fix/session-recovery`, `fix/sw-cache`, `fix/bridge-hardening`, puis `feature/session-pairing`.
+- Protection de `main` sur GitHub, `requirements.txt`, README, CHANGELOG, CONTRIBUTING, décision sur `A/` (GIT-03).
+
+### Blocages
+- Réponses de Valentin en attente : Safari ou icône installée, phrase exacte affichée, choix de session A/B/C.
+- Protection de `main` non configurée. Le Keychain mémorise encore un ancien compte GitHub.

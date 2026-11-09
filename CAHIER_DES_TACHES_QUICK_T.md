@@ -156,3 +156,15 @@ Les numéros sont indicatifs et suivront l'état réel du logiciel.
 | Date | Mise à jour |
 |---|---|
 | 2026-11-09 | Création du cahier des tâches. Aucune tâche réalisée. |
+
+
+## Tâches ajoutées suite à l'audit (2026-11-09, numérotation provisoire NOUV-xx, à valider)
+
+| Code | Priorité | Tâche |
+|---|---|---|
+| NOUV-01 | P0 | Mobile : effacer le jeton périmé sur 401, réafficher une saisie ou un message actionnable |
+| NOUV-02 | P0 | Pont : refuser livestreams, playlists et extracteurs génériques ; ajouter un timeout global |
+| NOUV-03 | P0 | Mobile : vérifier l'import audio local ; si `AudioContext` manque dans le Worker, décoder dans le thread principal (hypothèse à tester) |
+| NOUV-04 | P1 | Service worker : réseau d'abord pour `index.html` et les navigations, pour ne pas servir un ancien JS |
+| NOUV-05 | P1 | Pont : comparer le jeton en bytes, imposer une longueur minimale, trier les erreurs yt-dlp sans exposer de chemins |
+| NOUV-06 | P2 | Historique : supprimer, copier, enregistrer les échecs ; remplacer « sur cet iPhone » en dur par un texte adapté à l'appareil |
